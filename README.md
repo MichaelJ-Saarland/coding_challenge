@@ -41,6 +41,7 @@ Second step: Research of pre-designed solutions/frameworks that solve a lot of t
 		- API Specification in OpenAPI
 
 Third step: Creation of first project structure
+
 	Divide Ollama and FastAPI Code
 	app directory for FastAPI main.py
 	storage for persistent saving and loading of documents
@@ -52,6 +53,7 @@ Third step: Creation of first project structure
 	Another Dockerfile for the Ollama Server in the models directory
 	
 Fourth step: Research of existing Dockerfiles or input for FastAPI and Ollama
+
 	The providers of the frameworks generally have documentation about containerization of their frameworks i.e:
 	https://fastapi.tiangolo.com/deployment/docker/?h=docker
 	
@@ -84,11 +86,14 @@ Fifth step: Design of Python code with FastAPI
 	Tests were made with ChatGPT.
 	
 Sixth step: Deployment of the docker container on DockerHub
+
 	After intense testing the docker images are deployed on DockerHub:
 	
 	https://hub.docker.com/repository/docker/projectdc95/coding_challenge-ollama/general
 	and
-	https://hub.docker.com/repository/docker/projectdc95/coding_challenge-fastapi/general			 
+	https://hub.docker.com/repository/docker/projectdc95/coding_challenge-fastapi/generally
+
+	To use these images I suggest to use a docker-compose.yml that I will insert in the GitHub Repository
 
 
 Optional:
