@@ -1,0 +1,207 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/documents": {
+      "post": {
+        "summary": "Start Summarizer",
+        "operationId": "start_summarizer_documents_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/SummarizerInput"
+                },
+                "type": "array",
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SummarizerDocument"
+                  },
+                  "type": "array",
+                  "title": "Response Start Summarizer Documents Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents/{doc_uuid}": {
+      "get": {
+        "summary": "Summarize Process",
+        "operationId": "summarize_process_documents__doc_uuid__get",
+        "parameters": [
+          {
+            "name": "doc_uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Doc Uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SummarizerDocument"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "SummarizerDocument": {
+        "properties": {
+          "document_uuid": {
+            "type": "string",
+            "title": "Document Uuid",
+            "example": "generated-uuid"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "example": "PENDING"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "example": "A name for this document"
+          },
+          "URL": {
+            "type": "string",
+            "title": "Url",
+            "example": "https://some.url/to/an/article"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          }
+        },
+        "type": "object",
+        "required": [
+          "document_uuid",
+          "status",
+          "name",
+          "URL"
+        ],
+        "title": "SummarizerDocument"
+      },
+      "SummarizerInput": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "example": "A name for this document"
+          },
+          "URL": {
+            "type": "string",
+            "title": "Url",
+            "example": "https://some.url/to/an/article"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "URL"
+        ],
+        "title": "SummarizerInput"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  fastapi:
+    image: projectdc95/coding_challenge-fastapi:latest
+    volumes:
+      - ./storage/fastapi:/code/storage/fastapi
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ollama
+
+  ollama:
+    image: projectdc95/coding_challenge-ollama:latest
+    ports:
+      - "11434:11434"
